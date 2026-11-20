@@ -383,6 +383,14 @@ func Test_SourceInfo(t *testing.T) {
 				"",
 			},
 		},
+		{
+			input: pkg.Package{
+				Type: pkg.InHousePkg,
+			},
+			expected: []string{
+				"acquired package info from in-house artifact manifest",
+			},
+		},
 	}
 	var pkgTypes []pkg.Type
 	for _, test := range tests {

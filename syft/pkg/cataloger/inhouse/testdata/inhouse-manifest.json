@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "artifacts": [
+    {
+      "name": "acme-gateway",
+      "version": "2.3.1",
+      "kind": "application",
+      "description": "edge gateway service",
+      "supplier": "Acme Corp",
+      "licenses": ["Proprietary"],
+      "purl": "pkg:generic/acme-gateway@2.3.1",
+      "cpes": ["cpe:2.3:a:acme:gateway:2.3.1:*:*:*:*:*:*:*"],
+      "paths": ["/opt/acme/bin/gateway"],
+      "checksums": [
+        {
+          "algorithm": "sha256",
+          "value": "b5bb9d8014a0f9b1d61e21e796d78dccdf1352f23cd32812f4850b878ae4944c"
+        }
+      ]
+    },
+    {
+      "name": "acme-sidecar",
+      "version": "1.0.0",
+      "kind": "library",
+      "licenses": ["MIT"],
+      "paths": ["/opt/acme/lib/sidecar.so"]
+    },
+    {
+      "name": "acme-sidecar",
+      "version": "1.0.0",
+      "supplier": "Acme Corp",
+      "licenses": ["MIT", "Apache-2.0"],
+      "paths": ["/opt/acme/lib/sidecar.so", "/usr/lib/sidecar.so"],
+      "checksums": [
+        {
+          "algorithm": "sha256",
+          "value": "2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae"
+        }
+      ]
+    }
+  ]
+}

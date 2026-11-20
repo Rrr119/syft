@@ -5,6 +5,7 @@ import (
 
 	"github.com/anchore/syft/internal/relationship"
 	"github.com/anchore/syft/internal/relationship/binary"
+	"github.com/anchore/syft/internal/relationship/inhouse"
 	"github.com/anchore/syft/internal/sbomsync"
 	"github.com/anchore/syft/syft/artifact"
 	"github.com/anchore/syft/syft/cataloging"
@@ -43,6 +44,10 @@ func finalizeRelationships(resolver file.Resolver, builder sbomsync.Builder, cfg
 	// remove ELF packages and Binary packages that are already
 	// represented by a source package (e.g. a package that is evident by some package manager)
 	builder.DeletePackages(binary.PackagesToRemove(accessor)...)
+
+	// remove in-house packages and binary packages that are already
+	// represented by a higher-fidelity package (and vice versa)
+	builder.DeletePackages(inhouse.PackagesToRemove(accessor)...)
 
 	// add relationships showing packages that are evident by a file which is owned by another package (package-to-package)
 	if cfg.PackageFileOwnershipOverlap {

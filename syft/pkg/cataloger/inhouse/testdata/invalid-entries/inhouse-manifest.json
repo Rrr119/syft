@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "artifacts": [
+    {
+      "name": "",
+      "version": "1.0.0"
+    },
+    {
+      "name": "acme-no-version"
+    },
+    {
+      "name": "acme-worker",
+      "version": "3.2.1"
+    }
+  ]
+}

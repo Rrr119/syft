@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "anchore.io/schema/syft/json/16.1.13/document",
+  "$id": "anchore.io/schema/syft/json/16.1.14/document",
   "$ref": "#/$defs/Document",
   "$defs": {
     "AlpmDbEntry": {
@@ -1855,6 +1855,38 @@
       "type": "array",
       "description": "IDLikes represents a list of distribution IDs that this Linux distribution is similar to or derived from, as defined in os-release ID_LIKE field."
     },
+    "InHouseArtifact": {
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Kind is a free-form classification of the artifact (e.g. \"application\", \"library\", \"firmware\")"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description is a human-readable summary of the artifact"
+        },
+        "supplier": {
+          "type": "string",
+          "description": "Supplier is the organization or team that produced the artifact"
+        },
+        "checksums": {
+          "items": {
+            "$ref": "#/$defs/Digest"
+          },
+          "type": "array",
+          "description": "Checksums are cryptographic digests of the built artifact"
+        },
+        "paths": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "Paths are the locations within the scanned target where the artifact is deployed"
+        }
+      },
+      "type": "object",
+      "description": "InHouseArtifact represents a first-party (in-house / proprietary) build artifact that is declared by an organization's own build system in an in-house artifact manifest."
+    },
     "JavaArchive": {
       "properties": {
         "virtualPath": {
@@ -2936,6 +2968,9 @@
             },
             {
               "$ref": "#/$defs/HomebrewFormula"
+            },
+            {
+              "$ref": "#/$defs/InHouseArtifact"
             },
             {
               "$ref": "#/$defs/JavaArchive"

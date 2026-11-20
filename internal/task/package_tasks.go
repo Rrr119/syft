@@ -21,6 +21,7 @@ import (
 	"github.com/anchore/syft/syft/pkg/cataloger/golang"
 	"github.com/anchore/syft/syft/pkg/cataloger/haskell"
 	"github.com/anchore/syft/syft/pkg/cataloger/homebrew"
+	"github.com/anchore/syft/syft/pkg/cataloger/inhouse"
 	"github.com/anchore/syft/syft/pkg/cataloger/java"
 	"github.com/anchore/syft/syft/pkg/cataloger/javascript"
 	"github.com/anchore/syft/syft/pkg/cataloger/kernel"
@@ -198,6 +199,7 @@ func DefaultPackageTaskFactories() Factories {
 		newSimplePackageTaskFactory(snap.NewCataloger, pkgcataloging.DirectoryTag, pkgcataloging.InstalledTag, pkgcataloging.ImageTag, "snap"),
 		newSimplePackageTaskFactory(ai.NewGGUFCataloger, pkgcataloging.DirectoryTag, pkgcataloging.ImageTag, "ai", "model", "gguf", "ml"),
 		newSimplePackageTaskFactory(ai.NewSafeTensorsCataloger, pkgcataloging.DirectoryTag, pkgcataloging.ImageTag, "ai", "model", "safetensors", "ml"),
+		newSimplePackageTaskFactory(inhouse.NewCataloger, pkgcataloging.DeclaredTag, pkgcataloging.DirectoryTag, pkgcataloging.ImageTag, "inhouse", "in-house", "proprietary"),
 
 		// deprecated catalogers ////////////////////////////////////////
 		// these are catalogers that should not be selectable other than specific inclusion via name or "deprecated" tag (to remain backwards compatible)

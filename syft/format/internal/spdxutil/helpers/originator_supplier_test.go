@@ -176,6 +176,16 @@ func Test_OriginatorSupplier(t *testing.T) {
 			supplier:   "Person: auth1",
 		},
 		{
+			name: "from in-house artifact manifest",
+			input: pkg.Package{
+				Metadata: pkg.InHouseArtifact{
+					Supplier: "Acme Corp",
+				},
+			},
+			originator: "Organization: Acme Corp",
+			supplier:   "Organization: Acme Corp",
+		},
+		{
 			name: "from java -- spec > impl cendor in main manifest section",
 			input: pkg.Package{
 				Metadata: pkg.JavaArchive{

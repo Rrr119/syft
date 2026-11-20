@@ -139,6 +139,11 @@ func Originator(p pkg.Package) (typ string, author string) { //nolint: gocyclo,f
 	case pkg.SwiplPackEntry:
 		author = formatPersonOrOrg(metadata.Author, metadata.AuthorEmail)
 
+	case pkg.InHouseArtifact:
+		// the supplier declared in the manifest is the organization that produced the artifact
+		typ = orgType
+		author = metadata.Supplier
+
 	case pkg.VcpkgManifest:
 		if len(metadata.Maintainers) > 0 {
 			author = metadata.Maintainers[0]

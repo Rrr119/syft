@@ -170,6 +170,7 @@ func TestTypeFromPURL(t *testing.T) {
 	expectedTypes.Remove(string(AppleAppBundlePkg)) // no standard purl type for apple app bundles
 	expectedTypes.Remove(string(PhpPeclPkg))        // we should always consider this a pear package
 	expectedTypes.Remove(string(VcpkgPkg))
+	expectedTypes.Remove(string(InHousePkg)) // maps to the shared "generic" purl type, which does not round-trip
 
 	for _, test := range tests {
 		name := test.name

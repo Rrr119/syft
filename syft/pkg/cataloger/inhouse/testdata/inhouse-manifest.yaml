@@ -1,0 +1,10 @@
+version: 1
+artifacts:
+  - name: acme-cli
+    version: 0.9.0
+    kind: application
+    supplier: Acme Corp
+    licenses:
+      - Proprietary
+    paths:
+      - /usr/local/bin/acme

@@ -88,6 +88,8 @@ func SourceInfo(p pkg.Package) string {
 		answer = "acquired package info from Terraform dependency lock file"
 	case pkg.ModelPkg:
 		answer = "acquired package info from AI model artifact"
+	case pkg.InHousePkg:
+		answer = "acquired package info from in-house artifact manifest"
 	case pkg.VcpkgPkg:
 		answer = "acquired package info from vcpkg manifest file"
 	default:
