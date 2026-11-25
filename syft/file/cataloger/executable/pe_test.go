@@ -9,8 +9,26 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
+	"github.com/anchore/syft/syft/file"
 	"github.com/anchore/syft/syft/internal/unionreader"
 )
+
+func Test_findPEFeaturesImportedLibraries(t *testing.T) {
+	fixture := filepath.Join("..", "..", "..", "..", "syft", "pkg", "cataloger", "binary", "testdata", "library-dependencies", "programs", "pe_07.exe")
+	f, err := os.Open(fixture)
+	if os.IsNotExist(err) {
+		t.Skipf("compiled PE fixture is unavailable: %v", err)
+	}
+	require.NoError(t, err)
+	defer f.Close()
+
+	data := file.Executable{}
+	require.NoError(t, findPEFeatures(&data, f))
+
+	assert.Contains(t, data.ImportedLibraries, "syft07-1.dll")
+	assert.Contains(t, data.ImportedLibraries, "KERNEL32.dll")
+	assert.Contains(t, data.ImportedLibraries, "msvcrt.dll")
+}
 
 func Test_peHasEntrypoint(t *testing.T) {
 

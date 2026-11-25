@@ -1,0 +1,17 @@
+{
+  "root": "/home/dev/feedback/uid36783",
+  "B": "/home/dev/feedback/uid36783",
+  "sha": "df665446b2abc092adeb89cbd983db388116b647",
+  "wslDistro": "Ubuntu-26.04",
+  "source": {
+    "owner": "anchore",
+    "repo": "syft",
+    "sha": "df665446b2abc092adeb89cbd983db388116b647"
+  },
+  "fork": {
+    "owner": "Rrr119",
+    "repo": "syft",
+    "cloneUrl": "https://github.com/Rrr119/syft.git"
+  },
+  "at": "2026-11-25T00:56:38.329Z"
+}

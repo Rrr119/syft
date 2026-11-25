@@ -55,6 +55,9 @@ func finalizeRelationships(resolver file.Resolver, builder sbomsync.Builder, cfg
 		relationship.ExcludeBinariesByFileOwnershipOverlap(accessor)
 	}
 
+	// upgrade cataloger-provided binary coordinate edges to package-to-package edges where possible
+	binary.ResolveCoordinateDependencies(accessor)
+
 	// add the new relationships for executables to the SBOM
 	newBinaryRelationships := binary.NewDependencyRelationships(resolver, accessor)
 	accessor.WriteToSBOM(func(s *sbom.SBOM) {

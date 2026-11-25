@@ -1102,3 +1102,52 @@ catalogers:
             default: false
           - name: package_manager.package_integrity_hash
             default: false
+  - ecosystem: binary # MANUAL
+    name: binary-dependency-cataloger # AUTO-GENERATED
+    type: custom # AUTO-GENERATED
+    source: # AUTO-GENERATED
+      file: ""
+      function: ""
+    selectors: # AUTO-GENERATED
+      - binary
+      - declared
+      - dependency
+      - directory
+      - elf
+      - image
+      - installed
+      - library
+      - package
+      - pe
+    detectors: # MANUAL
+      - method: mimetype
+        criteria:
+          - application/x-executable
+          - application/x-mach-binary
+          - application/x-elf
+          - application/x-sharedlib
+          - application/vnd.microsoft.portable-executable
+    metadata_types: # MANUAL
+      - pkg.ELFBinaryPackageNoteJSONPayload
+      - pkg.PEBinary
+    package_types: # MANUAL
+      - binary
+    json_schema_types: # MANUAL
+      - ElfBinaryPackageNoteJsonPayload
+      - PeBinary
+    capabilities: # MANUAL
+      - name: license
+        default: false
+      - name: dependency.depth
+        default: direct
+      - name: dependency.edges
+        default: package-to-package-when-resolved
+      - name: dependency.kinds
+        default:
+          - dynamic-library
+      - name: package_manager.files.listing
+        default: false
+      - name: package_manager.files.digests
+        default: false
+      - name: package_manager.package_integrity_hash
+        default: false

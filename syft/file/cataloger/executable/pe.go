@@ -2,10 +2,12 @@ package executable
 
 import (
 	"debug/pe"
+	"strings"
 
 	"github.com/scylladb/go-set/strset"
 
 	"github.com/anchore/syft/syft/file"
+	"github.com/anchore/syft/syft/internal/peutil"
 	"github.com/anchore/syft/syft/internal/unionreader"
 )
 
@@ -17,7 +19,25 @@ func findPEFeatures(data *file.Executable, reader unionreader.UnionReader) error
 		return err
 	}
 
-	libs, err := f.ImportedLibraries()
+	libs, err := peutil.ImportedLibraries(f)
+	if err != nil || len(libs) == 0 {
+		// debug/pe derives DLL names while parsing symbols; retain this fallback for binaries with
+		// import tables our focused parser does not accept.
+		if symbols, symbolErr := f.ImportedSymbols(); symbolErr == nil {
+			seen := make(map[string]struct{})
+			for _, symbol := range symbols {
+				if idx := strings.LastIndex(symbol, ":"); idx >= 0 && idx < len(symbol)-1 {
+					name := symbol[idx+1:]
+					key := strings.ToLower(name)
+					if _, ok := seen[key]; !ok {
+						seen[key] = struct{}{}
+						libs = append(libs, name)
+						err = nil
+					}
+				}
+			}
+		}
+	}
 	if err != nil {
 		return err
 	}

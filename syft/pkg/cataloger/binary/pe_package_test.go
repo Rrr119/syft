@@ -22,3 +22,18 @@ func TestGhostscriptPEGeneratesGenericPURL(t *testing.T) {
 		t.Fatalf("expected purl %q, got %q", expected, p.PURL)
 	}
 }
+
+func TestTrimBinaryExtension(t *testing.T) {
+	tests := map[string]string{
+		"syft07-1.dll": "syft07-1",
+		"SERVER.EXE":   "SERVER",
+		"plugin.BPL":   "plugin",
+		"README.txt":   "README.txt",
+	}
+
+	for input, want := range tests {
+		if got := trimBinaryExtension(input); got != want {
+			t.Errorf("trimBinaryExtension(%q) = %q, want %q", input, got, want)
+		}
+	}
+}

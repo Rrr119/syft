@@ -88,11 +88,25 @@ func findNameFromVR(versionResources map[string]string) string {
 			continue
 		}
 		name = value
+		if field == "OriginalFilename" {
+			name = trimBinaryExtension(name)
+		}
 		break
 	}
 
 	return name
 }
+
+func trimBinaryExtension(name string) string {
+	lower := strings.ToLower(name)
+	for _, ext := range []string{".dll", ".exe", ".bpl"} {
+		if strings.HasSuffix(lower, ext) {
+			return name[:len(name)-len(ext)]
+		}
+	}
+	return name
+}
+
 func isMicrosoftVR(versionResources map[string]string) bool {
 	return strings.Contains(strings.ToLower(versionResources["CompanyName"]), "microsoft") ||
 		strings.Contains(strings.ToLower(versionResources["ProductName"]), "microsoft")
